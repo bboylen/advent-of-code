@@ -1,3 +1,3 @@
 input = File.read("input").split("\n\n")
-
-puts input[0], input[1]
+drawn_numbers = input.shift
+squares = input
