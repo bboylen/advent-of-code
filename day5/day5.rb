@@ -56,6 +56,7 @@ end
 # puts count_collisions(straight_lines)
 collision_count, collisions = count_collisions(straight_lines)
 puts collision_count
+
 ### PART 2
 
 def is_diagonal (line)
@@ -74,5 +75,31 @@ end
 diagonal_lines = end_points.filter(&->(line) {is_diagonal(line)})
 
 def count_diag_collisions(diagonal_lines, collisions, collision_count)
+  diagonal_lines.each do |line|
+    x1_greater = (line[0][0] > line[1][0]) ? true : false
+    y1_greater = (line[0][1] > line[1][1]) ? true : false
 
+    delta = (line[0][0] - line[1][0]).abs + 1
+    x = line[0][0]
+    y = line[0][1]
+
+    (delta).times do |i|
+      if !collisions[x][y]
+        collisions[x][y] = 1
+      elsif collisions[x][y] == 1
+        collisions[x][y] += 1
+        collision_count +=1
+      else
+        collisions[x][y] += 1
+      end
+
+      x = x1_greater ? x - 1 : x + 1
+      y = y1_greater ? y - 1 : y + 1
+    end
+  end
+  collision_count
 end
+
+total_collisions = count_diag_collisions(diagonal_lines, collisions, collision_count)
+
+print total_collisions
