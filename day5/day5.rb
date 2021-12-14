@@ -50,7 +50,29 @@ def count_collisions(straight_lines)
       end
     end
   end
-  collision_count
+  [collision_count, collisions]
 end
 
-puts count_collisions(straight_lines)
+# puts count_collisions(straight_lines)
+collision_count, collisions = count_collisions(straight_lines)
+puts collision_count
+### PART 2
+
+def is_diagonal (line)
+  x1 = line[0][0]
+  y1 = line[0][1]
+  x2 = line[1][0]
+  y2 = line[1][1]
+
+  if (y2-y1).abs == (x2-x1).abs
+    true
+  else
+    false
+  end
+end
+
+diagonal_lines = end_points.filter(&->(line) {is_diagonal(line)})
+
+def count_diag_collisions(diagonal_lines, collisions, collision_count)
+
+end
