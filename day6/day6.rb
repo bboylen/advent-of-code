@@ -1,0 +1,34 @@
+fish_list = File.read("input").split(",").map {|fish| 
+  fish.chomp
+  fish.to_i
+}
+
+# 60.times do |x|
+#   length = fish_list.length - 1
+#   new_count = 0
+#   for i in 0..length 
+#     if fish_list[i] == 0
+#       fish_list[i] = 6
+#       fish_list.append(8)
+#       new_count += 1
+#     else
+#       fish_list[i] -= 1
+#     end
+#   end
+#   puts new_count
+# end
+
+#  puts fish_list.length
+
+## PART 2
+
+fish_array = Array.new(9) {0}
+fish_list.each {|age| fish_array[age] +=1 }
+# print fish_array
+
+256.times do 
+  fish_array.rotate!
+  fish_array[6] += fish_array[8]
+end
+
+print fish_array.sum
