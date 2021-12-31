@@ -9,11 +9,11 @@ def iterateThroughMap(map)
   basinList = []
   map.length.times do |row|
     map[row].length.times do |col|
-      if !visited.include?([row, col]) && map[row][col] != 9 
-        visited.add([row, col])
-        basinSize = traverseBasin(row, col, visited, map)
-        basinList = addToBasin(basinSize, basinList)
-      end
+      next unless !visited.include?([row, col]) && map[row][col] != 9
+
+      visited.add([row, col])
+      basinSize = traverseBasin(row, col, visited, map)
+      basinList = addToBasin(basinSize, basinList)
     end
   end
   basinList
@@ -28,24 +28,24 @@ def traverseBasin(row, col, visited, map)
     i, j = queue.deq
     count += 1
 
-    if i > 0 && map[i-1][j] != 9 && !visited.include?([i-1,j])
-      visited << [i-1, j]
-      queue << [i-1, j]
+    if i > 0 && map[i - 1][j] != 9 && !visited.include?([i - 1, j])
+      visited << [i - 1, j]
+      queue << [i - 1, j]
     end
 
-    if i < map.length - 1 && map[i+1][j] != 9 && !visited.include?([i+1,j])
-      visited << [i+1, j]
-      queue << [i+1, j]
+    if i < map.length - 1 && map[i + 1][j] != 9 && !visited.include?([i + 1, j])
+      visited << [i + 1, j]
+      queue << [i + 1, j]
     end
 
-    if j > 0 && map[i][j-1] != 9 && !visited.include?([i,j-1])
-      visited << [i, j-1]
-      queue << [i, j-1]
+    if j > 0 && map[i][j - 1] != 9 && !visited.include?([i, j - 1])
+      visited << [i, j - 1]
+      queue << [i, j - 1]
     end
 
-    if j < map[0].length - 1 && map[i][j+1] != 9 && !visited.include?([i,j+1])
-      visited << [i, j+1]
-      queue << [i, j+1]
+    if j < map[0].length - 1 && map[i][j + 1] != 9 && !visited.include?([i, j + 1])
+      visited << [i, j + 1]
+      queue << [i, j + 1]
     end
 
   end
@@ -55,7 +55,7 @@ end
 
 def addToBasin(basin, basinList)
   if basinList.length < 3
-    basinList << basin 
+    basinList << basin
   else
     min = basinList.min
     if basin > min
@@ -66,16 +66,6 @@ def addToBasin(basin, basinList)
   basinList
 end
 
- file = readInput('input')
- print iterateThroughMap(file).reduce(1, :*)
+file = readInput('input')
+print iterateThroughMap(file).reduce(:*)
 
-# a= ['2199943210',
-# '3987894921',
-# '9856789892',
-# '8767896789',
-# '9899965678']
-# a = a.map{|row| row.split('').map(&:to_i)}
-# print a
-
-# puts
-#  print iterateThroughMap(a).reduce(1, :*)
