@@ -11,9 +11,13 @@ end
 
 def driver_func(input)
   flashes = 0
-  100.times do
+  400.times do |i|
     flash_result = run_flashes(input)
     input = flash_result[0]
+    if flash_result[1] == 100
+      print input 
+      puts
+    end
     flashes += flash_result[1]
   end
   flashes
