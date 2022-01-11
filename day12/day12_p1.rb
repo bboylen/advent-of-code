@@ -10,6 +10,9 @@ def start(paths)
   start_nodes = get_neighbors('start', paths)
   start_nodes.each do |node|
     visited = Set['start']
+    if is_lower?(node)
+      visited.add(node)
+    end
     path = [node]
     count += traverse(node, paths, visited, path)
   end
@@ -22,18 +25,18 @@ def traverse(node, paths, visited, path)
   if node == "end"
     return 1
   end
-  print path
+  print visited
   puts
   neighbors = get_neighbors(node, paths)
   valid = neighbors.filter { |adj| !visited.include?(adj) }
-  valid.each do |nextn|
-    if is_lower?(nextn[0])
-      visited.add(nextn) 
+  valid.each do |next_node|
+    if is_lower?(next_node[0])
+      visited.add(next_node) 
     end
-    path.push(nextn)
-    count += traverse(nextn, paths, visited, path)
+    path.push(next_node)
+    count += traverse(next_node, paths, visited, path)
     path.pop
-    visited.delete?(nextn)
+    visited.delete?(next_node)
   end
   count
 end
