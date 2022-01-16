@@ -22,13 +22,18 @@ def count_periods(grid)
 end
 
 def make_folds(grid, instructions)
+  count = 0
   instructions.each do |instruction|
+    count += 1
     if instruction[0] == "x"
       grid = vertical_fold(grid, instruction[1])
     else 
       grid = horizontal_fold(grid, instruction[1])
     end
-  end
+    if count == 1
+      count_periods(grid)
+    end
+  end  
   print grid
 end
 
@@ -75,8 +80,6 @@ end
 def main(input)
   coords, instructions = parse_input(input)
   grid = populate_grid(coords)
-  # new_grid = vertical_fold(grid, instructions[0][1])
-  # count_periods(new_grid)
   make_folds(grid, instructions)
 end
 
