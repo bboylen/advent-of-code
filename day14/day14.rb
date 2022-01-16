@@ -5,12 +5,9 @@ rules.map! { |rule| rule.split(' -> ') }
 
 def transform(template, rules)
   return_template = template
-  print return_template
-  puts
   rules.each do |rule|
-    print rule[0][0]
-    puts
     return_template = template.gsub(rule[0], "#{rule[0][0]}#{rule[1]}#{rule[0][1]}")
+    # iterate through string with sliding window of size 2. if substring matches rule AND hasn't been "visited", make the replacement
   end
   return_template
 end
