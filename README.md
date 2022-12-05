@@ -1,3 +1,3 @@
-# advent-of-code-2021
+# advent-of-code
 
-Working through the AOC 2021 problems in Ruby
+Working through the AOC 2021/2022 problems in Ruby
